@@ -1,4 +1,6 @@
+import json
 from math import sin, pi
+from ..meta.meta import geom_reduce
 
 earth_radius = 6335439  # FROM WIKIPEDIA meridional radius of curvature at the equator
 
@@ -9,10 +11,11 @@ def area(geojson):
 
 def calculate_area(geom):
     """
-     Takes one or more features and returns their area in square meters.
+    Takes one or more features and returns their area in square meters.
     """
+    # print("CALCULATE AREA GEOM")
     geom_type = geom.get("type", None)
-    coords = geom.get("coords", None)
+    coords = geom.get("coordinates", None)
 
     if not geom_type or not coords:
         raise ValueError
@@ -39,13 +42,14 @@ def calculate_area(geom):
 
 def polygon_area(coords):
     poly_area = 0
-    if coords and not len(coords) > 0:
+    if not coords or len(coords) == 0:
         return poly_area
 
     poly_area += abs(ring_area(coords[0]))
+
     for i in range(1, len(coords)):
         poly_area -= abs(ring_area(coords[i]))
-
+    # print(f"poly_area {poly_area}")
     return poly_area
 
 
@@ -79,3 +83,13 @@ def ring_area(coords):
 
 def rad(num):
     return (num * pi) / 180
+
+
+def area_test():
+    with open("./test-geojson/real.json") as json_obj:
+        return area(json.load(json_obj))
+
+
+print("\narea.py")
+print(area_test())
+print(20310537131.032818)
