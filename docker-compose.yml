@@ -1,9 +1,0 @@
- services: 
-  app:
-    container_name: pyturf
-    build:
-      context: .
-    volumes:
-      - ./test-geojson:/test-geojson
-    ports:
-      - "8765:80"
