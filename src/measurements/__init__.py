@@ -1,2 +1,2 @@
-from .area import area
-from .bbox import bbox
+from .area.area import area
+from .bbox.bbox import bbox

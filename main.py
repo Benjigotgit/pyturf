@@ -1,6 +1,6 @@
 import json
-from functions.measurements import area, bbox
-from functions.booleans import is_valid
+from src.measurements import area, bbox
+from src.booleans import is_valid
 
 with open("./test-geojson/example-mp.json") as file:
     obj = json.load(file)
